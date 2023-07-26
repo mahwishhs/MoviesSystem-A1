@@ -7,6 +7,9 @@ public class Actor {
     private String dateOfBirth;
     private String nationality;
 
+    public Actor() {
+    }
+
     public Actor(int actorId, String firstName, String lastName, String dateOfBirth, String nationality) {
         this.actorId = actorId;
         this.firstName = firstName;
@@ -14,6 +17,20 @@ public class Actor {
         this.dateOfBirth = dateOfBirth;
         this.nationality = nationality;
     }
+
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
 
     public int getActorId() {
         return actorId;

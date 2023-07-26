@@ -39,4 +39,21 @@ public class DBConn {
         config.setMaximumPoolSize(10);
         dataSource = new HikariDataSource(config);
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        try {
+//            // Try to get a database connection
+//            Connection connection = getConnection();
+//
+//            // If the connection is successful, print a success message
+//            System.out.println("Connection to the database was successful!");
+//
+//            // Don't forget to close the connection
+//            connection.close();
+//        } catch (SQLException e) {
+//            // If there is an exception, print an error message
+//            System.err.println("Failed to connect to the database: " + e.getMessage());
+//        }
+//
+//    }
 }

@@ -7,12 +7,32 @@ public class Director {
     private String dateOfBirth;
     private String nationality;
 
+
+    public Director(){
+
+    }
     public Director(int directorId, String firstName, String lastName, String dateOfBirth, String nationality) {
         this.directorId = directorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.nationality = nationality;
+    }
+
+    public void setDirectorId(int directorId) {
+        this.directorId = directorId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public int getDirectorId() {

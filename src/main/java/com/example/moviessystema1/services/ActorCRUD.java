@@ -1,6 +1,7 @@
 package com.example.moviessystema1.services;
 
 import com.example.moviessystema1.domain.Actor;
+import com.example.moviessystema1.domain.Movie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -102,4 +103,35 @@ public class ActorCRUD {
         return null;
     }
 
+    public static List<Movie> getMoviesByActorName(String actorName) {
+        List<Movie> movies = new ArrayList<>();
+        String sql = "SELECT m.movie_id, m.title, m.release_date, m.duration, m.plot_summary, m.language, m.budget, m.box_office_collection " +
+                "FROM Movies m " +
+                "JOIN Movie_Cast mc ON m.movie_id = mc.movie_id " +
+                "JOIN Actors a ON mc.actor_id = a.actor_id " +
+                "WHERE CONCAT(a.first_name, ' ', a.last_name) = ?";
+        try (Connection connection = DBConn.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, actorName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Movie movie = new Movie(
+                            resultSet.getInt("movie_id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("release_date"),
+                            resultSet.getInt("duration"),
+                            resultSet.getString("plot_summary"),
+                            resultSet.getString("language"),
+                            resultSet.getDouble("budget"),
+                            resultSet.getDouble("box_office_collection")
+                    );
+                    movies.add(movie);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
 }

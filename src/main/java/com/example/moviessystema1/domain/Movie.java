@@ -14,7 +14,9 @@ public class Movie {
     private double boxOfficeCollection;
     private List<Actor> actors;
     private List<Director> directors;
-    private List<Genre> genres;
+    private List<String> genres;
+    private String genre;
+
 
     public Movie(){}
 
@@ -31,6 +33,51 @@ public class Movie {
         this.actors = new ArrayList<>();
         this.directors = new ArrayList<>();
         this.genres = new ArrayList<>();
+    }
+
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+//    public void setDirectors(List<Director> directors) {
+//        this.directors = directors;
+//    }
+//
+//    public void setActors(List<Actor> actors) {
+//        this.actors = actors;
+//    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+//
+//    public void setGenres(List<Genre> genres) {
+//        this.genres = genres;
+//    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setPlotSummary(String plotSummary) {
+        this.plotSummary = plotSummary;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
+
+    public void setBoxOfficeCollection(double boxOfficeCollection) {
+        this.boxOfficeCollection = boxOfficeCollection;
     }
 
     public int getMovieId() {
@@ -64,30 +111,64 @@ public class Movie {
     public double getBoxOfficeCollection() {
         return boxOfficeCollection;
     }
+//
+//    public List<Actor> getActors() {
+//        return actors;
+//    }
+//
+//    public List<Director> getDirectors() {
+//        return directors;
+//    }
+//
+//    public List<Genre> getGenres() {
+//        return genres;
+//    }
+
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    public void addActor(Actor actor) {
+        actors.add(actor);
+    }
 
     public List<Actor> getActors() {
         return actors;
+    }
+
+    public void setDirectors(List<Director> directors) {
+        this.directors = directors;
+    }
+
+    public void addDirector(Director director) {
+        directors.add(director);
     }
 
     public List<Director> getDirectors() {
         return directors;
     }
 
-    public List<Genre> getGenres() {
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public void addGenre(String genre) {
+        genres.add(genre);
+    }
+
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void addActor(Actor actor, String role) {
-        actors.add(new Actor(actor.getActorId(), actor.getFirstName(), actor.getLastName(), actor.getDateOfBirth(), actor.getNationality()));
-    }
 
-    public void addDirector(Director director) {
-        directors.add(new Director(director.getDirectorId(), director.getFirstName(), director.getLastName(), director.getDateOfBirth(), director.getNationality()));
-    }
 
-    public void addGenre(Genre genre) {
-        genres.add(new Genre(genre.getGenreId(), genre.getName()));
-    }
+
+
 
     @Override
     public String toString() {
@@ -100,9 +181,9 @@ public class Movie {
                 ", language='" + language + '\'' +
                 ", budget=" + budget +
                 ", boxOfficeCollection=" + boxOfficeCollection +
-                ", actors=" + actors +
-                ", directors=" + directors +
                 ", genres=" + genres +
                 '}';
     }
+
+
 }
