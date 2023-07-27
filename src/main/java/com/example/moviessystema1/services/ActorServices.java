@@ -1,8 +1,6 @@
 package com.example.moviessystema1.services;
 
 import com.example.moviessystema1.domain.Actor;
-import com.example.moviessystema1.domain.Movie;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActorCRUD {
+public class ActorServices {
     public static void addActor(Actor actor){
         String sql = "INSERT INTO Actors (actor_id, first_name, last_name, date_of_birth, nationality) " +
                 "VALUES (?, ?, ?, ?, ?)";
@@ -103,35 +101,34 @@ public class ActorCRUD {
         return null;
     }
 
-    public static List<Movie> getMoviesByActorName(String actorName) {
-        List<Movie> movies = new ArrayList<>();
-        String sql = "SELECT m.movie_id, m.title, m.release_date, m.duration, m.plot_summary, m.language, m.budget, m.box_office_collection " +
-                "FROM Movies m " +
-                "JOIN Movie_Cast mc ON m.movie_id = mc.movie_id " +
-                "JOIN Actors a ON mc.actor_id = a.actor_id " +
-                "WHERE CONCAT(a.first_name, ' ', a.last_name) = ?";
+    public static List<Actor> getActorsByName(String actorName) {
+        List<Actor> actors = new ArrayList<>();
+        String sql = "SELECT * FROM Actors WHERE first_name LIKE ? OR last_name LIKE ?";
+
         try (Connection connection = DBConn.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, actorName);
+            preparedStatement.setString(1, "%" + actorName + "%");
+            preparedStatement.setString(2, "%" + actorName + "%");
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Movie movie = new Movie(
-                            resultSet.getInt("movie_id"),
-                            resultSet.getString("title"),
-                            resultSet.getString("release_date"),
-                            resultSet.getInt("duration"),
-                            resultSet.getString("plot_summary"),
-                            resultSet.getString("language"),
-                            resultSet.getDouble("budget"),
-                            resultSet.getDouble("box_office_collection")
-                    );
-                    movies.add(movie);
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int actorId = resultSet.getInt("actor_id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String dateOfBirth = resultSet.getString("date_of_birth");
+                String nationality = resultSet.getString("nationality");
+
+                Actor actor = new Actor(actorId, firstName, lastName, dateOfBirth, nationality);
+                actors.add(actor);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return movies;
+
+        return actors;
     }
+
+
+
 }

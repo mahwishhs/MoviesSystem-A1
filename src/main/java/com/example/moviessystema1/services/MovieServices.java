@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MovieCRUD {
+public class MovieServices {
     public static List<Movie> getAllMovies() {
         List<Movie> movies = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class MovieCRUD {
         return movies;
     }
 
-    private static List<Actor> getActorsForMovie(int movieId) {
+    static List<Actor> getActorsForMovie(int movieId) {
         List<Actor> actors = new ArrayList<>();
 
         try (Connection connection = DBConn.getConnection();
@@ -78,7 +78,7 @@ public class MovieCRUD {
         return actors;
     }
 
-    private static List<Director> getDirectorsForMovie(int movieId) {
+    static List<Director> getDirectorsForMovie(int movieId) {
         List<Director> directors = new ArrayList<>();
 
         try (Connection connection = DBConn.getConnection();
@@ -104,9 +104,6 @@ public class MovieCRUD {
 
         return directors;
     }
-
-
-//--------------------FOR ADDINGGGGG MOVIESSSS------------
 
     public static void addMovie(Movie movie) {
         try (Connection connection = DBConn.getConnection()) {
@@ -149,7 +146,6 @@ public class MovieCRUD {
         }
     }
 
-    // Method to save directors for a movie in the database
     private static void saveDirectorsForMovie(Connection connection, int movieId, List<Director> directors) throws SQLException {
         String insertDirectorQuery = "INSERT INTO Movie_Directors (movie_id, director_id) VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertDirectorQuery)) {
