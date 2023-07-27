@@ -178,7 +178,7 @@ public class MovieServices {
         }
     }
 
-    private static void deleteActorsForMovie(Connection connection, int movieId) throws SQLException {
+    static void deleteActorsForMovie(Connection connection, int movieId) throws SQLException {
         String deleteActorsQuery = "DELETE FROM Movie_Cast WHERE movie_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteActorsQuery)) {
             preparedStatement.setInt(1, movieId);
@@ -186,7 +186,7 @@ public class MovieServices {
         }
     }
 
-    private static void deleteDirectorsForMovie(Connection connection, int movieId) throws SQLException {
+    static void deleteDirectorsForMovie(Connection connection, int movieId) throws SQLException {
         String deleteDirectorsQuery = "DELETE FROM Movie_Directors WHERE movie_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteDirectorsQuery)) {
             preparedStatement.setInt(1, movieId);
@@ -444,7 +444,7 @@ public class MovieServices {
         }
     }
 
-    private static void updateActorsForMovie(Connection connection, int movieId, List<Actor> actors) throws SQLException {
+    static void updateActorsForMovie(Connection connection, int movieId, List<Actor> actors) throws SQLException {
         // First, delete existing actors for the movie
         String deleteActorsQuery = "DELETE FROM Movie_Cast WHERE movie_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteActorsQuery)) {

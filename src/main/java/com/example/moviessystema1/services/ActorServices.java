@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActorServices {
+
     public static void addActor(Actor actor){
         String sql = "INSERT INTO Actors (actor_id, first_name, last_name, date_of_birth, nationality) " +
                 "VALUES (?, ?, ?, ?, ?)";
